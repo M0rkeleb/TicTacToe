@@ -210,3 +210,10 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+TicTacToe.sln
+*.opendb
+*.vcxproj
+TicTacToe/TicTacToe.vcxproj.filters
+TicTacToe/stdafx.cpp
+TicTacToe/stdafx.h
+TicTacToe/targetver.h

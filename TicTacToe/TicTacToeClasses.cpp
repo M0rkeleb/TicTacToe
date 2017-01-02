@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "TicTacToeClasses.h"
 
-TicTacToeBoard::TicTacToeBoard(std::size_t dimension = 3) :m_dimension(dimension)
+TicTacToeBoard::TicTacToeBoard(std::size_t dimension) :m_dimension(dimension)
 {
 	boardContents = new char*[dimension];
 	boardContents[0] = new char[dimension * dimension];
@@ -27,4 +27,15 @@ bool TicTacToeBoard::victoryReached()
 		diagUpRightWin = diagUpRightWin && (getFromSquare(i, m_dimension - 1 - i) == getFromSquare(lastPlacedRow, lastPlacedCol));
 	}
 	return rowWin || colWin || diagDownRightWin || diagUpRightWin;
+}
+
+bool TicTacToeBoard::gameTied()
+{
+	for (std::size_t i = 0; i < m_dimension; i++)
+	{
+		for (std::size_t j = 0; j < m_dimension; j++)
+			if (getFromSquare(i, j) == '_') return false;
+	}
+	//going to assume victoryReached will be checked first, so a full board is always tied.
+	return true;
 }

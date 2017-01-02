@@ -25,6 +25,7 @@ public:
 	}
 	friend std::ostream& operator<< (std::ostream &out, const TicTacToeBoard &tttBoard);
 	bool victoryReached();
+	bool gameTied();
 private:
 	const std::size_t m_dimension;
 	char** boardContents;

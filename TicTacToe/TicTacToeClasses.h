@@ -5,20 +5,8 @@ class TicTacToeBoard
 {
 public:
 	TicTacToeBoard(std::size_t dimension = 3);
-	~TicTacToeBoard()
-	{
-		delete[] boardContents[0];
-		delete[] boardContents;
-	}
-	void placeInSquare(size_t i, size_t j, char placed)
-	{
-		if ((placed == 'X' || placed == 'O') && i < m_dimension && j < m_dimension)
-		{
-			boardContents[i][j] = placed;
-			lastPlacedRow = i;
-			lastPlacedCol = j;
-		}
-	}
+	~TicTacToeBoard();
+	void placeInSquare(std::size_t i, std::size_t j, char placed);
 	char getFromSquare(size_t i, size_t j)
 	{
 		if (i < m_dimension && j < m_dimension) { return boardContents[i][j]; }

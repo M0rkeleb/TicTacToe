@@ -13,6 +13,22 @@ TicTacToeBoard::TicTacToeBoard(std::size_t dimension) :m_dimension(dimension)
 	}
 }
 
+TicTacToeBoard::~TicTacToeBoard()
+{
+	delete[] boardContents[0];
+	delete[] boardContents;
+}
+
+void TicTacToeBoard::placeInSquare(std::size_t i, std::size_t j, char placed)
+{
+	if ((placed == 'X' || placed == 'O') && i < m_dimension && j < m_dimension)
+	{
+		boardContents[i][j] = placed;
+		lastPlacedRow = i;
+		lastPlacedCol = j;
+	}
+}
+
 bool TicTacToeBoard::victoryReached()
 {
 	bool rowWin = true;
@@ -38,4 +54,14 @@ bool TicTacToeBoard::gameTied()
 	}
 	//going to assume victoryReached will be checked first, so a full board is always tied.
 	return true;
+}
+
+std::ostream & operator<<(std::ostream & out, const TicTacToeBoard & tttBoard)
+{
+	for (size_t i = 0; i < tttBoard.m_dimension; i++)
+	{
+		for (size_t j = 0; j < tttBoard.m_dimension; j++) { out << tttBoard.boardContents[i][j] << " "; }
+		out << std::endl;
+	}
+	return out;
 }

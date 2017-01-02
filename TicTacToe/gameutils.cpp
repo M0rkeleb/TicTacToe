@@ -9,14 +9,28 @@ std::string getPlayerName(std::istream &inRead)
 	return pName;
 }
 
-void getMultPlayerNames(std::string *playerNameList, std::size_t numPlayers, std::istream &inRead, std::ostream &outRead)
+void getMultPlayerNames(GamePlayer *playerNameList, std::size_t numPlayers, std::istream &inRead, std::ostream &outRead)
 {
-	std::string *returnList = playerNameList;
 	for (std::size_t i = 0; i < numPlayers; i++)
 	{
 		outRead << "Enter name for player " << i+1 << std::endl;
-		inRead >> *playerNameList;
-		playerNameList++;
+		inRead >> (*(playerNameList+i)).playerName;
 	}
-	playerNameList = returnList;
+}
+
+void getMultPlayerNumbers(GamePlayer *playerNameList, std::size_t numPlayers)
+{
+	for (std::size_t i = 0; i < numPlayers; i++) (*(playerNameList + i)).playerNumber = i + 1;
+}
+
+void getMultPlayerIdentShorts(GamePlayer *playerNameList, std::size_t numPlayers, char *shortsList)
+{
+	for (std::size_t i = 0; i < numPlayers; i++) (*(playerNameList + i)).playerIdentShort = *(shortsList + i);
+}
+
+void initPlayerList(GamePlayer *playerNameList, std::size_t numPlayers, std::istream &inRead, std::ostream &outRead, char *shortsList)
+{
+	getMultPlayerNames(playerNameList, numPlayers, inRead, outRead);
+	getMultPlayerNumbers(playerNameList, numPlayers);
+	getMultPlayerIdentShorts(playerNameList, numPlayers, shortsList);
 }

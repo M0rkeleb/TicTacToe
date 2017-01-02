@@ -26,12 +26,3 @@ int main()
     return 0;
 }
 
-std::ostream & operator<<(std::ostream & out, const TicTacToeBoard & tttBoard)
-{
-	for (size_t i = 0; i < tttBoard.m_dimension; i++)
-	{
-		for (size_t j = 0; j < tttBoard.m_dimension; j++) { out << tttBoard.boardContents[i][j] << " "; }
-		out << std::endl;
-	}
-	return out;
-}

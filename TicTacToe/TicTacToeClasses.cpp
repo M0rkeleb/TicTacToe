@@ -39,10 +39,10 @@ bool TicTacToeBoard::victoryReached()
 	bool diagUpRightWin = (lastPlacedCol + lastPlacedRow + 1 == m_dimension);
 	for (size_t i = 0; i < m_dimension; i++)
 	{
-		rowWin = rowWin && (getFromSquare(lastPlacedRow, i) == getFromSquare(lastPlacedRow, lastPlacedCol));
-		colWin = colWin && (getFromSquare(i, lastPlacedCol) == getFromSquare(lastPlacedRow, lastPlacedCol));
-		diagDownRightWin = diagDownRightWin && (getFromSquare(i, i) == getFromSquare(lastPlacedRow, lastPlacedCol));
-		diagUpRightWin = diagUpRightWin && (getFromSquare(i, m_dimension - 1 - i) == getFromSquare(lastPlacedRow, lastPlacedCol));
+		rowWin = rowWin && (getFromSquare(lastPlacedRow, i) == currPlayer());
+		colWin = colWin && (getFromSquare(i, lastPlacedCol) == currPlayer());
+		diagDownRightWin = diagDownRightWin && (getFromSquare(i, i) == currPlayer());
+		diagUpRightWin = diagUpRightWin && (getFromSquare(i, m_dimension - 1 - i) == currPlayer());
 	}
 	return rowWin || colWin || diagDownRightWin || diagUpRightWin;
 }

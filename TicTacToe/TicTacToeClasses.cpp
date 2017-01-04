@@ -81,3 +81,28 @@ TicTacToeGame::~TicTacToeGame()
 	delete m_board;
 	delete m_playerNameList;
 }
+
+bool TicTacToeGame::checkEnding()
+{
+	//Check if the game is over and print result.
+	//First check for a win.
+	if ((*m_board).victoryReached())
+	{
+		std::cout << "Game is won by " << playerFromIdent((*m_board).currPlayer()) << "." << std::endl;
+		return true;
+	}
+	//Check for a tie.
+	if ((*m_board).gameTied())
+	{
+		std::cout << "Game ends in a tie." << std::endl;
+		return true;
+	}
+	return false;
+}
+
+std::string TicTacToeGame::playerFromIdent(char ident)
+{
+	char tttIdents[2]{ 'X','O' };
+	for (std::size_t i = 0; i < 2; i++) if (ident == tttIdents[i]) return (*(m_playerNameList + i)).playerName;
+	return std::string();
+}

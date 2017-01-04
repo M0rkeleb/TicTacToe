@@ -15,6 +15,7 @@ public:
 	friend std::ostream& operator<< (std::ostream &out, const TicTacToeBoard &tttBoard);
 	bool victoryReached();
 	bool gameTied();
+	char currPlayer() { return getFromSquare(lastPlacedRow, lastPlacedCol); }
 private:
 	const std::size_t m_dimension;
 	char** boardContents;
@@ -27,6 +28,8 @@ class TicTacToeGame
 public:
 	TicTacToeGame(std::size_t dimension = 3);
 	~TicTacToeGame();
+	bool checkEnding();
+	std::string playerFromIdent(char ident);
 
 private:
 	TicTacToeBoard* m_board;

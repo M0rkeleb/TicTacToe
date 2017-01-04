@@ -3,7 +3,7 @@
 #include "gameutils.h"
 #include <iostream>
 
-TicTacToeBoard::TicTacToeBoard(std::size_t dimension) :m_dimension(dimension)
+TicTacToeBoard::TicTacToeBoard(std::size_t dimension) :m_dimension(dimension), lastPlacedRow(dimension), lastPlacedCol(dimension)
 {
 	boardContents = new char*[dimension];
 	boardContents[0] = new char[dimension * dimension];
@@ -105,4 +105,22 @@ std::string TicTacToeGame::playerFromIdent(char ident)
 	char tttIdents[2]{ 'X','O' };
 	for (std::size_t i = 0; i < 2; i++) if (ident == tttIdents[i]) return (*(m_playerNameList + i)).playerName;
 	return std::string();
+}
+
+void TicTacToeGame::playTurn()
+{
+	int playRow, playCol;
+	std::cout << playerFromIdent(nextPlacedIdent()) << ", choose a square to place an " << nextPlacedIdent() << " on." << std::endl;
+	std::cout << "Choose a row." << std::endl;
+	std::cin >> playRow;
+	std::cout << "Choose a column." << std::endl;
+	std::cin >> playCol;
+	(*m_board).placeInSquare(playRow, playCol, nextPlacedIdent());
+}
+
+char TicTacToeGame::nextPlacedIdent()
+{
+	if ((*m_board).noPlaysYet()) { return 'X'; }
+	if ((*m_board).currPlayer() == 'X') { return 'O'; }
+	return 'X';
 }

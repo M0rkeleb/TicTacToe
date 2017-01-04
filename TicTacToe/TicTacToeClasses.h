@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "gameutils.h"
 
 class TicTacToeBoard
 {
@@ -20,3 +21,16 @@ private:
 	std::size_t lastPlacedRow, lastPlacedCol;
 
 };
+
+class TicTacToeGame
+{
+public:
+	TicTacToeGame(std::size_t dimension = 3);
+	~TicTacToeGame();
+
+private:
+	TicTacToeBoard* m_board;
+	GamePlayer* m_playerNameList;
+
+};
+

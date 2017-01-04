@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "TicTacToeClasses.h"
+#include "gameutils.h"
+#include <iostream>
 
 TicTacToeBoard::TicTacToeBoard(std::size_t dimension) :m_dimension(dimension)
 {
@@ -64,4 +66,18 @@ std::ostream & operator<<(std::ostream & out, const TicTacToeBoard & tttBoard)
 		out << std::endl;
 	}
 	return out;
+}
+
+TicTacToeGame::TicTacToeGame(std::size_t dimension)
+{
+	m_playerNameList = new GamePlayer[2];
+	m_board = new TicTacToeBoard(dimension);
+	char tttIdents[2]{ 'X','O' };
+	initPlayerList(m_playerNameList, 2, std::cin, std::cout, tttIdents);
+}
+
+TicTacToeGame::~TicTacToeGame()
+{
+	delete m_board;
+	delete m_playerNameList;
 }

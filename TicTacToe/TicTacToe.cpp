@@ -24,6 +24,9 @@ int main()
 	if (testResult == 0) { std::cout << "No failures." << std::endl; }
 	else { std::cout << "Failed test " << testResult << "." << std::endl; }*/
 
+	TicTacToeGame the_game;
+	the_game.playGame();
+
     return 0;
 }
 

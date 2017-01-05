@@ -79,7 +79,7 @@ TicTacToeGame::TicTacToeGame(std::size_t dimension)
 TicTacToeGame::~TicTacToeGame()
 {
 	delete m_board;
-	delete m_playerNameList;
+	delete[] m_playerNameList;
 }
 
 bool TicTacToeGame::checkEnding()
@@ -115,7 +115,7 @@ void TicTacToeGame::playTurn()
 	std::cin >> playRow;
 	std::cout << "Choose a column." << std::endl;
 	std::cin >> playCol;
-	(*m_board).placeInSquare(playRow, playCol, nextPlacedIdent());
+	(*m_board).placeInSquare(playRow - 1, playCol - 1, nextPlacedIdent());
 }
 
 char TicTacToeGame::nextPlacedIdent()
@@ -123,4 +123,12 @@ char TicTacToeGame::nextPlacedIdent()
 	if ((*m_board).noPlaysYet()) { return 'X'; }
 	if ((*m_board).currPlayer() == 'X') { return 'O'; }
 	return 'X';
+}
+
+void TicTacToeGame::playGame()
+{
+	do { 
+		playTurn();
+		std::cout << (*m_board);
+	} while (!checkEnding());
 }

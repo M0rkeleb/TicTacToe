@@ -33,6 +33,7 @@ public:
 	std::string playerFromIdent(char ident);
 	void playTurn();
 	char nextPlacedIdent();
+	void playGame();
 
 private:
 	TicTacToeBoard* m_board;

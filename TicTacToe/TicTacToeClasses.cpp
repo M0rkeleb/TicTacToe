@@ -111,10 +111,8 @@ void TicTacToeGame::playTurn()
 {
 	int playRow, playCol;
 	std::cout << playerFromIdent(nextPlacedIdent()) << ", choose a square to place an " << nextPlacedIdent() << " on." << std::endl;
-	std::cout << "Choose a row." << std::endl;
-	std::cin >> playRow;
-	std::cout << "Choose a column." << std::endl;
-	std::cin >> playCol;
+	playRow = getInput(std::cin, std::cout, "Choose a row. ", playRow);
+	playCol = getInput(std::cin, std::cout, "Choose a column. ", playCol);
 	(*m_board).placeInSquare(playRow - 1, playCol - 1, nextPlacedIdent());
 }
 

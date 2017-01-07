@@ -17,6 +17,7 @@ public:
 	bool gameTied();
 	char currPlayer() { return getFromSquare(lastPlacedRow, lastPlacedCol); }
 	bool noPlaysYet() { return (lastPlacedRow == m_dimension || lastPlacedCol == m_dimension); }
+	std::size_t size() { return m_dimension; }
 private:
 	const std::size_t m_dimension;
 	char** boardContents;
@@ -34,7 +35,7 @@ public:
 	void playTurn();
 	char nextPlacedIdent();
 	void playGame();
-
+	bool validLocInput(int userInput) { return (userInput >= 1 && userInput <= (*(m_board)).size()); }
 private:
 	TicTacToeBoard* m_board;
 	GamePlayer* m_playerNameList;

@@ -110,10 +110,14 @@ std::string TicTacToeGame::playerFromIdent(char ident)
 void TicTacToeGame::playTurn()
 {
 	int playRow, playCol;
-	std::cout << playerFromIdent(nextPlacedIdent()) << ", choose a square to place an " << nextPlacedIdent() << " on." << std::endl;
-	playRow = getInput(std::cin, std::cout, "Choose a row. ", playRow, &TicTacToeGame::validLocInput, this);
-	playCol = getInput(std::cin, std::cout, "Choose a column. ", playCol, &TicTacToeGame::validLocInput, this);
-	(*m_board).placeInSquare(playRow - 1, playCol - 1, nextPlacedIdent());
+	while (true)
+	{
+		std::cout << playerFromIdent(nextPlacedIdent()) << ", choose a square to place an " << nextPlacedIdent() << " on." << std::endl;
+		playRow = getInput(std::cin, std::cout, "Choose a row. ", playRow, &TicTacToeGame::validLocInput, this);
+		playCol = getInput(std::cin, std::cout, "Choose a column. ", playCol, &TicTacToeGame::validLocInput, this);
+		if ((*m_board).getFromSquare(playRow - 1, playCol - 1) == '_') { (*m_board).placeInSquare(playRow - 1, playCol - 1, nextPlacedIdent()); return; }
+		std::cout << "That square is already full. You cannot place there." << std::endl;
+	}
 }
 
 char TicTacToeGame::nextPlacedIdent()

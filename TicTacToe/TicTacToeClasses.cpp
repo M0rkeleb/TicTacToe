@@ -129,8 +129,9 @@ char TicTacToeGame::nextPlacedIdent()
 
 void TicTacToeGame::playGame()
 {
-	do { 
-		playTurn();
+	do {
 		std::cout << (*m_board);
+		playTurn();
 	} while (!checkEnding());
+	std::cout << (*m_board);
 }

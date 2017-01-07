@@ -10,13 +10,14 @@ public:
 	void placeInSquare(std::size_t i, std::size_t j, char placed);
 	char getFromSquare(size_t i, size_t j)
 	{
-		if (i < m_dimension && j < m_dimension) { return boardContents[i][j]; }
+		if (i < m_dimension && j < m_dimension) { return boardContents[i][j]; } return '_';
 	}
 	friend std::ostream& operator<< (std::ostream &out, const TicTacToeBoard &tttBoard);
 	bool victoryReached();
 	bool gameTied();
 	char currPlayer() { return getFromSquare(lastPlacedRow, lastPlacedCol); }
 	bool noPlaysYet() { return (lastPlacedRow == m_dimension || lastPlacedCol == m_dimension); }
+	std::size_t size() { return m_dimension; }
 private:
 	const std::size_t m_dimension;
 	char** boardContents;
@@ -34,7 +35,7 @@ public:
 	void playTurn();
 	char nextPlacedIdent();
 	void playGame();
-
+	bool validLocInput(int userInput) { return (userInput >= 1 && userInput <= (*(m_board)).size()); }
 private:
 	TicTacToeBoard* m_board;
 	GamePlayer* m_playerNameList;

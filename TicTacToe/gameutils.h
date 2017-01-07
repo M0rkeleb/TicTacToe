@@ -19,4 +19,25 @@ void getMultPlayerIdentShorts(GamePlayer *playerNameList, std::size_t numPlayers
 
 void initPlayerList(GamePlayer *playerNameList, std::size_t numPlayers, std::istream &inRead, std::ostream &outRead, char *shortsList);
 
+template <typename T, typename F, typename Z>
+T getInput(std::istream &inRead, std::ostream &outRead, std::string prompt, T &userInput, F valFcn, Z usingClass)
+{
+	while (true)
+	{
+		outRead << prompt;
+		inRead >> userInput;
+		if (inRead.fail())
+		{
+			inRead.clear();
+			inRead.ignore(100, '\n');
+		}
+		else if (((*usingClass).*valFcn)(userInput))
+		{
+			inRead.ignore(100, '\n');
+			return userInput;
+		}
+		outRead << "Invalid input, try again. ";
+	}
+}
+
 

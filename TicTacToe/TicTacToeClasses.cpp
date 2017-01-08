@@ -5,20 +5,13 @@
 
 TicTacToeBoard::TicTacToeBoard(std::size_t dimension) :m_dimension(dimension), lastPlacedRow(dimension), lastPlacedCol(dimension)
 {
-	boardContents = new char*[dimension];
-	boardContents[0] = new char[dimension * dimension];
-	for (size_t i = 0; i < dimension; i++)
+	boardContents.resize(dimension);
+	for (auto &e: boardContents)
 	{
-		if (i != 0) boardContents[i] = boardContents[i - 1] + dimension;
-		for (size_t j = 0; j < dimension; j++)
-			boardContents[i][j] = '_';
+		e.resize(dimension);
+		for (auto &f: e)
+			f = '_';
 	}
-}
-
-TicTacToeBoard::~TicTacToeBoard()
-{
-	delete[] boardContents[0];
-	delete[] boardContents;
 }
 
 void TicTacToeBoard::placeInSquare(std::size_t i, std::size_t j, char placed)

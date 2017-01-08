@@ -6,7 +6,6 @@ class TicTacToeBoard
 {
 public:
 	TicTacToeBoard(std::size_t dimension = 3);
-	~TicTacToeBoard();
 	void placeInSquare(std::size_t i, std::size_t j, char placed);
 	char getFromSquare(size_t i, size_t j)
 	{
@@ -20,7 +19,7 @@ public:
 	std::size_t size() { return m_dimension; }
 private:
 	const std::size_t m_dimension;
-	char** boardContents;
+	std::vector<std::vector<char>> boardContents;
 	std::size_t lastPlacedRow, lastPlacedCol;
 
 };

@@ -70,16 +70,14 @@ std::ostream & operator<<(std::ostream & out, const TicTacToeBoard & tttBoard)
 
 TicTacToeGame::TicTacToeGame(std::size_t dimension)
 {
-	m_playerNameList = new GamePlayer[2];
 	m_board = new TicTacToeBoard(dimension);
 	char tttIdents[2]{ 'X','O' };
-	initPlayerList(m_playerNameList, 2, std::cin, std::cout, tttIdents);
+	initPlayerList(m_playerNameList, std::cin, std::cout, tttIdents);
 }
 
 TicTacToeGame::~TicTacToeGame()
 {
 	delete m_board;
-	delete[] m_playerNameList;
 }
 
 bool TicTacToeGame::checkEnding()
@@ -102,8 +100,7 @@ bool TicTacToeGame::checkEnding()
 
 std::string TicTacToeGame::playerFromIdent(char ident)
 {
-	char tttIdents[2]{ 'X','O' };
-	for (std::size_t i = 0; i < 2; i++) if (ident == tttIdents[i]) return (*(m_playerNameList + i)).playerName;
+	for (auto e: m_playerNameList) if (ident == e.playerIdentShort) return e.playerName;
 	return std::string();
 }
 

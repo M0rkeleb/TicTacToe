@@ -38,7 +38,7 @@ public:
 	bool validLocInput(int userInput) { return (userInput >= 1 && userInput <= (*(m_board)).size()); }
 private:
 	TicTacToeBoard* m_board;
-	GamePlayer* m_playerNameList;
+	std::vector<GamePlayer> m_playerNameList;
 
 };
 

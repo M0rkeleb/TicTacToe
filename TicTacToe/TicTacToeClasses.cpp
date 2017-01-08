@@ -70,6 +70,7 @@ std::ostream & operator<<(std::ostream & out, const TicTacToeBoard & tttBoard)
 
 TicTacToeGame::TicTacToeGame(std::size_t dimension)
 {
+	m_playerNameList.resize(2);
 	m_board = new TicTacToeBoard(dimension);
 	char tttIdents[2]{ 'X','O' };
 	initPlayerList(m_playerNameList, std::cin, std::cout, tttIdents);

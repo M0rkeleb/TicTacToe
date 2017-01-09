@@ -100,7 +100,7 @@ std::string TicTacToeGame::playerFromIdent(char ident)
 
 void TicTacToeGame::playTurn()
 {
-	int playRow, playCol;
+	std::size_t playRow, playCol;
 	while (true)
 	{
 		std::cout << playerFromIdent(nextPlacedIdent()) << ", choose a square to place an " << nextPlacedIdent() << " on." << std::endl;

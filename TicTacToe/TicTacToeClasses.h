@@ -34,7 +34,7 @@ public:
 	void playTurn();
 	char nextPlacedIdent();
 	void playGame();
-	bool validLocInput(int userInput) { return (userInput >= 1 && userInput <= (*(m_board)).size()); }
+	bool validLocInput(std::size_t userInput) { return (userInput >= 1 && userInput <= (*(m_board)).size()); }
 private:
 	TicTacToeBoard* m_board;
 	std::vector<GamePlayer> m_playerNameList;

@@ -6,7 +6,6 @@ class TicTacToeBoard
 {
 public:
 	TicTacToeBoard(std::size_t dimension = 3);
-	~TicTacToeBoard();
 	void placeInSquare(std::size_t i, std::size_t j, char placed);
 	char getFromSquare(size_t i, size_t j)
 	{
@@ -20,7 +19,7 @@ public:
 	std::size_t size() { return m_dimension; }
 private:
 	const std::size_t m_dimension;
-	char** boardContents;
+	std::vector<std::vector<char>> boardContents;
 	std::size_t lastPlacedRow, lastPlacedCol;
 
 };
@@ -35,10 +34,10 @@ public:
 	void playTurn();
 	char nextPlacedIdent();
 	void playGame();
-	bool validLocInput(int userInput) { return (userInput >= 1 && userInput <= (*(m_board)).size()); }
+	bool validLocInput(std::size_t userInput) { return (userInput >= 1 && userInput <= (*(m_board)).size()); }
 private:
 	TicTacToeBoard* m_board;
-	GamePlayer* m_playerNameList;
+	std::vector<GamePlayer> m_playerNameList;
 
 };
 

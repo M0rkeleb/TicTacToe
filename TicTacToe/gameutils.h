@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 std::string getPlayerName(std::istream &inRead);
 
@@ -11,13 +12,7 @@ struct GamePlayer
 	char playerIdentShort;
 };
 
-void getMultPlayerNames(GamePlayer *playerNameList, std::size_t numPlayers, std::istream &inRead, std::ostream &outRead);
-
-void getMultPlayerNumbers(GamePlayer *playerNameList, std::size_t numPlayers);
-
-void getMultPlayerIdentShorts(GamePlayer *playerNameList, std::size_t numPlayers, char *shortsList);
-
-void initPlayerList(GamePlayer *playerNameList, std::size_t numPlayers, std::istream &inRead, std::ostream &outRead, char *shortsList);
+void initPlayerList(std::vector<GamePlayer> &playerList, std::istream &inRead, std::ostream &outRead, char *shortsList);
 
 template <typename T, typename F, typename Z>
 T getInput(std::istream &inRead, std::ostream &outRead, std::string prompt, T &userInput, F valFcn, Z usingClass)

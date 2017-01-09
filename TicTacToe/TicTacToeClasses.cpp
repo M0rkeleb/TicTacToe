@@ -5,20 +5,13 @@
 
 TicTacToeBoard::TicTacToeBoard(std::size_t dimension) :m_dimension(dimension), lastPlacedRow(dimension), lastPlacedCol(dimension)
 {
-	boardContents = new char*[dimension];
-	boardContents[0] = new char[dimension * dimension];
-	for (size_t i = 0; i < dimension; i++)
+	boardContents.resize(dimension);
+	for (auto &e: boardContents)
 	{
-		if (i != 0) boardContents[i] = boardContents[i - 1] + dimension;
-		for (size_t j = 0; j < dimension; j++)
-			boardContents[i][j] = '_';
+		e.resize(dimension);
+		for (auto &f: e)
+			f = '_';
 	}
-}
-
-TicTacToeBoard::~TicTacToeBoard()
-{
-	delete[] boardContents[0];
-	delete[] boardContents;
 }
 
 void TicTacToeBoard::placeInSquare(std::size_t i, std::size_t j, char placed)
@@ -49,10 +42,10 @@ bool TicTacToeBoard::victoryReached()
 
 bool TicTacToeBoard::gameTied()
 {
-	for (std::size_t i = 0; i < m_dimension; i++)
+	for (auto e: boardContents)
 	{
-		for (std::size_t j = 0; j < m_dimension; j++)
-			if (getFromSquare(i, j) == '_') return false;
+		for (auto f: e)
+			if (f == '_') return false;
 	}
 	//going to assume victoryReached will be checked first, so a full board is always tied.
 	return true;
@@ -60,9 +53,9 @@ bool TicTacToeBoard::gameTied()
 
 std::ostream & operator<<(std::ostream & out, const TicTacToeBoard & tttBoard)
 {
-	for (size_t i = 0; i < tttBoard.m_dimension; i++)
+	for (auto e: tttBoard.boardContents)
 	{
-		for (size_t j = 0; j < tttBoard.m_dimension; j++) { out << tttBoard.boardContents[i][j] << " "; }
+		for (auto f: e) { out << f << " "; }
 		out << std::endl;
 	}
 	return out;
@@ -70,16 +63,15 @@ std::ostream & operator<<(std::ostream & out, const TicTacToeBoard & tttBoard)
 
 TicTacToeGame::TicTacToeGame(std::size_t dimension)
 {
-	m_playerNameList = new GamePlayer[2];
+	m_playerNameList.resize(2);
 	m_board = new TicTacToeBoard(dimension);
 	char tttIdents[2]{ 'X','O' };
-	initPlayerList(m_playerNameList, 2, std::cin, std::cout, tttIdents);
+	initPlayerList(m_playerNameList, std::cin, std::cout, tttIdents);
 }
 
 TicTacToeGame::~TicTacToeGame()
 {
 	delete m_board;
-	delete[] m_playerNameList;
 }
 
 bool TicTacToeGame::checkEnding()
@@ -102,14 +94,13 @@ bool TicTacToeGame::checkEnding()
 
 std::string TicTacToeGame::playerFromIdent(char ident)
 {
-	char tttIdents[2]{ 'X','O' };
-	for (std::size_t i = 0; i < 2; i++) if (ident == tttIdents[i]) return (*(m_playerNameList + i)).playerName;
+	for (auto e: m_playerNameList) if (ident == e.playerIdentShort) return e.playerName;
 	return std::string();
 }
 
 void TicTacToeGame::playTurn()
 {
-	int playRow, playCol;
+	std::size_t playRow, playCol;
 	while (true)
 	{
 		std::cout << playerFromIdent(nextPlacedIdent()) << ", choose a square to place an " << nextPlacedIdent() << " on." << std::endl;

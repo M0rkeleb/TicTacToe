@@ -42,10 +42,10 @@ bool TicTacToeBoard::victoryReached()
 
 bool TicTacToeBoard::gameTied()
 {
-	for (std::size_t i = 0; i < m_dimension; i++)
+	for (auto e: boardContents)
 	{
-		for (std::size_t j = 0; j < m_dimension; j++)
-			if (getFromSquare(i, j) == '_') return false;
+		for (auto f: e)
+			if (f == '_') return false;
 	}
 	//going to assume victoryReached will be checked first, so a full board is always tied.
 	return true;
@@ -53,9 +53,9 @@ bool TicTacToeBoard::gameTied()
 
 std::ostream & operator<<(std::ostream & out, const TicTacToeBoard & tttBoard)
 {
-	for (size_t i = 0; i < tttBoard.m_dimension; i++)
+	for (auto e: tttBoard.boardContents)
 	{
-		for (size_t j = 0; j < tttBoard.m_dimension; j++) { out << tttBoard.boardContents[i][j] << " "; }
+		for (auto f: e) { out << f << " "; }
 		out << std::endl;
 	}
 	return out;
